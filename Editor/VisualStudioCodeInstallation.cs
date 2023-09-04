@@ -71,7 +71,7 @@ namespace Microsoft.Unity.VisualStudio.Editor
 				return Directory.Exists(path) && (Regex.IsMatch(path, ".*Code.*.app$", RegexOptions.IgnoreCase) || Regex.IsMatch(path, ".*Cursor.*.app$", RegexOptions.IgnoreCase));
 
 			if (VisualStudioEditor.IsWindows)
-				return File.Exists(path) && Regex.IsMatch(path, ".*Code.*.exe$", RegexOptions.IgnoreCase);
+				return File.Exists(path) && (Regex.IsMatch(path, ".*Code.*.exe$", RegexOptions.IgnoreCase) || Regex.IsMatch(path, ".*Cursor.*.exe$", RegexOptions.IgnoreCase));
 
 			return File.Exists(path) && path.EndsWith("code", StringComparison.OrdinalIgnoreCase);
 		}
@@ -148,6 +148,7 @@ namespace Microsoft.Unity.VisualStudio.Editor
 				{
 					candidates.Add(IOPath.Combine(basePath, "Microsoft VS Code", "Code.exe"));
 					candidates.Add(IOPath.Combine(basePath, "Microsoft VS Code Insiders", "Code - Insiders.exe"));
+					candidates.Add(IOPath.Combine(basePath, "cursor", "Cursor.exe"));
 				}
 			}
 			else if (VisualStudioEditor.IsOSX)
